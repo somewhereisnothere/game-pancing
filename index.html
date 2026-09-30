@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PANCING RUPIAH 🎣💰</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <!-- Aurora sky gradient background -->
+  <div class="sky"></div>
+
+  <!-- Animated clouds layer -->
+  <div class="clouds" id="clouds"></div>
+
+  <!-- Animated water waves (SVG) -->
+  <div class="water-container">
+    <svg class="water-svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path class="wave-path wave-p1" d="M0,160 C320,220 440,100 720,160 C1000,220 1120,100 1440,160 L1440,320 L0,320 Z" />
+      <path class="wave-path wave-p2" d="M0,200 C280,260 560,140 720,200 C880,260 1160,140 1440,200 L1440,320 L0,320 Z" />
+      <path class="wave-path wave-p3" d="M0,240 C240,280 480,200 720,240 C960,280 1200,200 1440,240 L1440,320 L0,320 Z" />
+    </svg>
+    <div class="water-base"></div>
+    <div class="water-ripples" id="water-ripples"></div>
+  </div>
+
+  <!-- Silhouette trees / palms -->
+  <div class="trees" id="trees"></div>
+
+  <!-- Fisher character (SVG interactive) -->
+  <div class="fisher-container" id="fisher-container">
+    <svg class="fisher-svg" viewBox="0 0 220 260" role="img" aria-label="Pemancing duduk di dermaga">
+      <!-- Wooden dock -->
+      <rect x="5" y="215" width="210" height="18" rx="4" class="dock" />
+      <rect x="15" y="232" width="12" height="20" class="dock-leg" />
+      <rect x="190" y="232" width="12" height="20" class="dock-leg" />
+
+      <!-- Fisher body -->
+      <g id="fisher-body">
+        <!-- Torso / shirt -->
+        <path d="M80,155 Q85,140 110,140 Q135,140 140,155 Q140,175 80,175 Z" class="shirt" />
+        <!-- Sarong -->
+        <path d="M78,175 Q80,198 140,198 Q142,175 130,172 Q115,170 105,170 Q90,170 78,175 Z" class="sarong" />
+        <!-- Legs -->
+        <rect x="95" y="198" width="9" height="22" rx="3" class="leg" />
+        <rect x="114" y="198" width="9" height="22" rx="3" class="leg" />
+        <!-- Left arm resting -->
+        <line x1="85" y1="150" x2="70" y2="170" class="arm-left" />
+      </g>
+
+      <!-- Fisher head -->
+      <g id="fisher-head">
+        <!-- Neck -->
+        <rect x="103" y="128" width="12" height="14" rx="3" class="neck" />
+        <!-- Face -->
+        <circle cx="110" cy="118" r="22" class="face" />
+        <!-- Eyes -->
+        <g class="eyes">
+          <circle cx="103" cy="115" r="3" class="eye" />
+          <circle cx="117" cy="115" r="3" class="eye" />
+          <!-- Pupils -->
+          <circle cx="104" cy="114" r="1.2" class="pupil" />
+          <circle cx="118" cy="114" r="1.2" class="pupil" />
+        </g>
+        <!-- Eyebrows -->
+        <line x1="99" y1="109" x2="106" y2="110" class="brow" />
+        <line x1="114" y1="110" x2="121" y2="109" class="brow" />
+        <!-- Mouth (smile) -->
+        <path d="M105,125 Q110,129 115,125" class="mouth" fill="none" />
+        <!-- Blush -->
+        <ellipse cx="96" cy="120" rx="5" ry="3" class="blush" />
+        <ellipse cx="124" cy="120" rx="5" ry="3" class="blush" />
+        <!-- Caping / traditional hat -->
+        <path d="M85,106 Q110,80 135,106 Q130,112 85,112 Z" class="cap" />
+        <path d="M80,112 Q110,116 140,112" class="cap-brim" fill="none" />
+      </g>
+
+      <!-- Right arm holding rod -->
+      <line x1="135" y1="150" x2="165" y2="115" class="arm-right" />
+
+      <!-- Fishing rod (bamboo) -->
+      <line x1="165" y1="115" x2="195" y2="78" class="rod" />
+      <!-- Rod tip guide -->
+      <circle cx="195" cy="78" r="2" class="rod-tip" />
+      <!-- Fishing line -->
+      <path d="M195,78 Q200,120 198,155" class="line" fill="none" />
+      <!-- Hook -->
+      <path d="M198,155 Q202,162 196,165 Q192,162 196,158" class="hook-path" fill="none" />
+
+      <!-- Wallet on belt -->
+      <rect x="128" y="170" width="14" height="10" rx="3" class="wallet" />
+    </svg>
+
+    <!-- Speech bubble -->
+    <div class="speech-bubble fisher-speech" id="fisher-speech" aria-live="polite"></div>
+  </div>
+
+  <!-- Bank Indonesia building (SVG interactive) -->
+  <div class="bank-container" id="bank-container">
+    <svg class="bank-svg" viewBox="0 0 240 280" role="img" aria-label="Gedung Bank Sentral">
+      <!-- Foundation -->
+      <rect x="25" y="230" width="190" height="15" rx="3" class="foundation" />
+      <!-- Stairs -->
+      <rect x="80" y="245" width="80" height="6" rx="2" class="stair" />
+      <rect x="90" y="251" width="60" height="6" rx="2" class="stair" />
+
+      <!-- Bank walls -->
+      <rect x="35" y="90" width="170" height="140" class="bank-wall" />
+
+      <!-- Columns (classic style) -->
+      <g id="bank-columns">
+        <rect x="45" y="90" width="16" height="140" rx="3" class="column" />
+        <rect x="82" y="90" width="16" height="140" rx="3" class="column" />
+        <rect x="142" y="90" width="16" height="140" rx="3" class="column" />
+        <rect x="179" y="90" width="16" height="140" rx="3" class="column" />
+        <!-- Column capitals -->
+        <rect x="42" y="86" width="22" height="8" rx="2" class="capital" />
+        <rect x="79" y="86" width="22" height="8" rx="2" class="capital" />
+        <rect x="139" y="86" width="22" height="8" rx="2" class="capital" />
+        <rect x="176" y="86" width="22" height="8" rx="2" class="capital" />
+      </g>
+
+      <!-- Roof / pediment -->
+      <g id="bank-roof">
+        <polygon points="20,85 120,35 220,85" class="roof" />
+        <polygon points="30,85 120,42 210,85" class="roof-inner" />
+        <!-- Roof ornament -->
+        <circle cx="120" cy="58" r="10" class="roof-emblem" />
+        <text x="120" y="63" text-anchor="middle" class="emblem-text" font-size="11" font-weight="bold">BI</text>
+      </g>
+
+      <!-- Bank sign -->
+      <rect x="65" y="100" width="110" height="20" rx="4" class="bank-sign" />
+      <text x="120" y="115" text-anchor="middle" class="sign-text" font-size="10" font-weight="bold">BANK SENTRAL</text>
+
+      <!-- Windows -->
+      <g id="bank-windows">
+        <rect x="50" y="130" width="18" height="22" rx="3" class="window" />
+        <rect x="86" y="130" width="18" height="22" rx="3" class="window" />
+        <rect x="136" y="130" width="18" height="22" rx="3" class="window" />
+        <rect x="172" y="130" width="18" height="22" rx="3" class="window" />
+        <rect x="50" y="165" width="18" height="22" rx="3" class="window" />
+        <rect x="172" y="165" width="18" height="22" rx="3" class="window" />
+      </g>
+
+      <!-- Door -->
+      <g id="bank-door">
+        <rect x="100" y="190" width="40" height="45" rx="5" class="bank-door-rect" />
+        <!-- Door handle -->
+        <circle cx="132" cy="215" r="3" class="door-handle" />
+        <!-- Door arch -->
+        <path d="M100,190 Q120,178 140,190" class="door-arch" fill="none" />
+      </g>
+
+      <!-- Deposit slot -->
+      <g id="bank-slot">
+        <rect x="106" y="178" width="28" height="8" rx="4" class="deposit-slot" />
+        <text x="120" y="185" text-anchor="middle" class="slot-text" font-size="6">SETOR</text>
+      </g>
+
+      <!-- Flag (red-white) -->
+      <g id="bank-flag">
+        <line x1="55" y1="85" x2="55" y2="18" class="flag-pole" />
+        <!-- Flag cloth -->
+        <g class="flag-cloth">
+          <rect x="55" y="18" width="35" height="10" class="flag-red" rx="1" />
+          <rect x="55" y="28" width="35" height="10" class="flag-white-part" rx="1" />
+        </g>
+      </g>
+
+      <!-- Lamp on entrance -->
+      <circle cx="92" cy="188" r="4" class="entrance-lamp" />
+      <circle cx="148" cy="188" r="4" class="entrance-lamp" />
+    </svg>
+
+    <!-- Speech bubble for bank -->
+    <div class="speech-bubble bank-speech" id="bank-speech" aria-live="polite"></div>
+  </div>
+
+  <!-- Floating coins animation on landing -->
+  <div class="floating-coins" id="floating-coins"></div>
+
+  <!-- Main landing content -->
+  <main class="landing-main">
+    <header class="landing-header">
+      <h1 class="game-title">
+        <span class="title-glow">🎣 PANCING</span>
+        <span class="title-coin">RUPIAH 💰</span>
+      </h1>
+      <p class="subtitle">Pancing yang mulus, simpan di dompet. Yang lusuh, setor ke BI!</p>
+    </header>
+
+    <div class="landing-controls">
+      <label for="player-name" class="name-label">Nama Pemain:</label>
+      <input type="text" id="player-name" class="player-name-input" maxlength="12" placeholder="Ketik namamu..." autocomplete="off">
+
+      <button class="btn btn-primary" id="start-btn" aria-label="Mulai bermain Pancing Rupiah">
+        <span class="btn-text">🎣 MULAI MEMANCING</span>
+      </button>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" id="howto-btn" aria-label="Cara memainkan game">
+          <span class="btn-text">📖 CARA MAIN</span>
+        </button>
+        <button class="btn btn-secondary" id="highscore-btn" aria-label="Lihat skor tertinggi">
+          <span class="btn-text">🏆 SKOR TERTINGGI</span>
+        </button>
+        <button class="btn btn-secondary" id="sound-btn" aria-label="Toggle suara" aria-pressed="false">
+          <span class="btn-icon" id="sound-icon">🔊</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer with rotating facts -->
+  <footer class="landing-footer">
+    <div class="fact-container">
+      <span class="fact-icon">💡</span>
+      <span class="fact-text" id="fact-text" aria-live="polite">Tahukah kamu?</span>
+    </div>
+    <p class="disclaimer">Ilustrasi game, bukan alat pembayaran. Rupiah tetap bagus = dompet. Rupiah lusuh = setor ke BI.</p>
+  </footer>
+
+  <!-- Modal: Cara Main -->
+  <div class="modal-overlay" id="howto-modal" hidden>
+    <div class="modal" role="dialog" aria-labelledby="howto-title" aria-modal="true">
+      <button class="modal-close" aria-label="Tutup">&times;</button>
+      <h2 id="howto-title">📖 Cara Main Pancing Rupiah</h2>
+      <div class="modal-content">
+        <ul class="howto-list">
+          <li><strong>🎯 Tujuan:</strong> Tangkap uang bagus ke dompet untuk poin, setor uang lusuh ke BI untuk bonus.</li>
+          <li><strong>🖱️ Posisi Bebas:</strong> Geser mouse atau jari di layar untuk menggerakkan kail pancing ke posisi mana saja!</li>
+          <li><strong>⚡ Lempar & Tarik Cepat:</strong> Klik / ketuk layar untuk menembak kail ke bawah. Kail akan menarik uang ke atas dengan cepat!</li>
+          <li><strong>⌨️ Keyboard:</strong> ← → geser kail, Spasi lempar kail, P pause, M mute.</li>
+          <li><strong>🔥 Combo:</strong> Tangkap beruntun untuk multiplier poin (hingga 4x)!</li>
+          <li><strong>⭐ Peduli Rupiah:</strong> Setor uang lusuh ke BI untuk mengisi meter. Penuh = Bonus Cinta Rupiah (2x Poin)!</li>
+          <li><strong>⏱️ Waktu:</strong> 60 detik mode klasik. Kumpulkan poin sebanyak-banyaknya!</li>
+          <li><strong>💵 Pecahan Rupiah:</strong> Koin (Rp100, 200, 500, 1.000) & Kertas (Rp1.000 s/d Rp100.000). Uang lusuh ditandai coretan & staples!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: High Score -->
+  <div class="modal-overlay" id="highscore-modal" hidden>
+    <div class="modal" role="dialog" aria-labelledby="hs-title" aria-modal="true">
+      <button class="modal-close" aria-label="Tutup">&times;</button>
+      <h2 id="hs-title">🏆 Skor Tertinggi</h2>
+      <div class="modal-content">
+        <div id="highscore-list" class="highscore-list">
+          <p class="no-score">Belum ada skor. Jadilah yang pertama!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== GAME ELEMENTS (Fase 2) ===== -->
+  <div class="game-container" id="game-container">
+    <canvas id="game-canvas"></canvas>
+
+    <!-- HUD (Heads-Up Display) -->
+    <div class="hud" id="hud">
+      <div class="hud-item">
+        <span class="hud-label">⏱️</span>
+        <span class="hud-value timer-value" id="hud-timer">60s</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">💰</span>
+        <span class="hud-value" id="hud-score">Rp 0</span>
+      </div>
+      <div class="combo-badge" id="hud-combo">🔥 COMBO x1</div>
+
+      <div class="peduli-bar-container" title="Meter Peduli Rupiah">
+        <span class="hud-label">⭐</span>
+        <div class="peduli-bar">
+          <div class="peduli-fill" id="peduli-fill"></div>
+        </div>
+      </div>
+
+      <button class="hud-btn" id="pause-btn" aria-label="Pause game">⏸️</button>
+    </div>
+
+    <!-- Wallet Widget -->
+    <div class="wallet-widget" id="wallet-widget">
+      <span class="wallet-icon">👛</span>
+      <span class="wallet-score" id="wallet-score">Rp 0</span>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+  </div>
+
+  <!-- Modal: Pause Game -->
+  <div class="modal-overlay" id="pause-modal" hidden>
+    <div class="modal" role="dialog" aria-labelledby="pause-title" aria-modal="true">
+      <h2 id="pause-title">⏸️ Game Paused</h2>
+      <div class="modal-content" style="text-align: center;">
+        <p style="margin-bottom: 20px;">Permainan dihentikan sejenak.</p>
+        <button class="btn btn-primary" id="resume-btn" style="margin-bottom: 10px;">Lanjutkan Mancing</button>
+        <button class="btn btn-secondary" id="quit-btn">Ke Menu Utama</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Game Over -->
+  <div class="modal-overlay" id="gameover-modal" hidden>
+    <div class="modal" role="dialog" aria-labelledby="go-title" aria-modal="true">
+      <h2 id="go-title">🏁 Permainan Selesai!</h2>
+      <div class="modal-content">
+        <div class="gameover-summary">
+          <div class="summary-card">
+            <div class="summary-label">Total Skor</div>
+            <div class="summary-value" id="final-score">Rp 0</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-label">Uang Bagus (Dompet)</div>
+            <div class="summary-value" id="final-good">0</div>
+          </div>
+          <div class="summary-card" style="grid-column: span 2;">
+            <div class="summary-label">Uang Lusuh (Setor BI)</div>
+            <div class="summary-value" id="final-worn" style="color: var(--bad);">0</div>
+          </div>
+        </div>
+
+        <div class="fact-box-gameover">
+          💡 <strong>Ingat 5 Jangan!</strong><br>
+          Jangan dilipat, dicoret, diremas, dibasahi, atau distapler agar Rupiah kita tetap bersih dan beredar lebih lama.
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+          <button class="btn btn-primary" id="restart-btn" style="margin-bottom: 10px;">🎮 Main Lagi</button>
+          <button class="btn btn-secondary" id="menu-btn">🏠 Menu Utama</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Scripts for Game Core -->
+  <script src="js/audio.js"></script>
+  <script src="js/score.js"></script>
+  <script src="js/money.js"></script>
+  <script src="js/hook.js"></script>
+  <script src="js/game.js"></script>
+
+  <!-- ===== INLINE SCRIPT (agar bisa jalan dari file://) ===== -->
+  <script>
+  (function() {
+    'use strict';
+
+    // ===== CONFIG =====
+    var FACTS = [
+      'Rupiah itu simbol kedaulatan negara. Rawat, ya!',
+      '5 Jangan: jangan dilipat, dicoret, diremas, dibasahi, distapler.',
+      'Uang lusuh bisa ditukarkan ke Bank Indonesia.',
+      'Cinta, Bangga, Paham Rupiah!',
+      'Cek keaslian uang dengan 3D: Dilihat, Diraba, Diterawang.',
+      'Uang yang dirawat baik bisa beredar lebih lama.',
+      'Uang lusuh yang disetor ke BI bisa ditukar dengan uang baru.',
+      'Simpan uang dengan benar, jangan dibasahi atau ditempel.'
+    ];
+
+    var FISHER_SPEECHES = [
+      'Ayo mancing!',
+      'Hari ini pasti dapat seratus ribu!',
+      'Rupiah bagus, masuk dompet!',
+      'Yang lusuh, setor ke BI ya!',
+      'Combo terus, jangan putus!',
+      'Wah, uang cantik nih!',
+      'Siap-siap dompet tebal!',
+      'Sabar... sabar... DAPAT!'
+    ];
+
+    var BANK_SPEECHES = [
+      'Rupiah lusuh? Setor ke sini!',
+      'Uang lusuh diganti baru di BI lho!',
+      'Sampaikan cinta pada Rupiah dengan merawatnya!',
+      '5 Jangan itu penting, ya!',
+      'Terima kasih sudah peduli Rupiah!',
+      'Cek 3D uangmu: Dilihat, Diraba, Diterawang!'
+    ];
+
+    // ===== HELPERS =====
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    function randInt(min, max) {
+      return Math.floor(rand(min, max + 1));
+    }
+    function shuffle(arr) {
+      var a = arr.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = randInt(0, i);
+        var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+      }
+      return a;
+    }
+    function pick(arr) {
+      return arr[randInt(0, arr.length - 1)];
+    }
+
+    // ===== DOM =====
+    var $ = function(sel) { return document.querySelector(sel); };
+    var $$ = function(sel) { return document.querySelectorAll(sel); };
+
+    var els = {
+      clouds:         $('#clouds'),
+      waterRipples:   $('#water-ripples'),
+      floatingCoins:  $('#floating-coins'),
+      trees:          $('#trees'),
+      fisher:         $('#fisher-container'),
+      bank:           $('#bank-container'),
+      fisherSpeech:   $('#fisher-speech'),
+      bankSpeech:     $('#bank-speech'),
+      startBtn:       $('#start-btn'),
+      howtoBtn:       $('#howto-btn'),
+      highscoreBtn:   $('#highscore-btn'),
+      soundBtn:       $('#sound-btn'),
+      soundIcon:      $('#sound-icon'),
+      nameInput:      $('#player-name'),
+      factText:       $('#fact-text'),
+      howtoModal:     $('#howto-modal'),
+      highscoreModal: $('#highscore-modal'),
+      highscoreList:  $('#highscore-list'),
+    };
+
+    // ===== STATE =====
+    var muted = false;
+    var fisherBusy = false;
+    var bankBusy = false;
+    var factsShuffled = shuffle(FACTS);
+    var factIdx = 0;
+
+    // ===== INIT =====
+    function init() {
+      loadSoundPref();
+      loadPlayerName();
+      spawnClouds(7);
+      spawnPalms();
+      startFloatingCoins();
+      startFactRotator();
+      setupFisherIdle();
+      setupBankIdle();
+      addEvents();
+    }
+
+    // ===== CLOUDS =====
+    function spawnClouds(n) {
+      for (var i = 0; i < n; i++) {
+        var c = document.createElement('div');
+        c.className = 'cloud' + (i % 3 === 0 ? ' thick' : '');
+        c.style.left = randInt(-10, 90) + 'vw';
+        c.style.top  = randInt(5, 40) + '%';
+        c.style.width = randInt(90, 170) + 'px';
+        c.style.height = randInt(35, 55) + 'px';
+        c.style.animationDuration = randInt(35, 80) + 's';
+        c.style.animationDelay = '-' + randInt(0, 40) + 's';
+        c.style.opacity = rand(0.55, 0.95);
+        els.clouds.appendChild(c);
+      }
+    }
+
+    // ===== PALMS =====
+    function spawnPalms() {
+      var positions = [5, 20, 45, 70, 88];
+      positions.forEach(function(p) {
+        var d = document.createElement('div');
+        d.className = 'palm';
+        d.style.left = p + 'vw';
+        d.style.bottom = '0';
+        d.style.fontSize = randInt(22, 36) + 'px';
+        d.style.animationDelay = rand(0, 3) + 's';
+        els.trees.appendChild(d);
+      });
+    }
+
+    // ===== FLOATING COINS =====
+    function startFloatingCoins() {
+      function spawn() {
+        var s = document.createElement('span');
+        s.className = 'floating-coin';
+        s.textContent = pick(['🪙', '💰', '💵', '🪙']);
+        s.style.left = randInt(5, 95) + 'vw';
+        s.style.bottom = '-30px';
+        s.style.fontSize = randInt(14, 26) + 'px';
+        s.style.animationDuration = randInt(10, 18) + 's';
+        s.style.animationDelay = '0s';
+        els.floatingCoins.appendChild(s);
+        setTimeout(function() { if (s.parentNode) s.remove(); }, 20000);
+      }
+      spawn();
+      setInterval(spawn, 2200);
+    }
+
+    // ===== FACTS ROTATOR =====
+    function startFactRotator() {
+      function show() {
+        els.factText.style.opacity = '0';
+        setTimeout(function() {
+          els.factText.textContent = factsShuffled[factIdx];
+          factIdx = (factIdx + 1) % factsShuffled.length;
+          els.factText.style.opacity = '1';
+        }, 400);
+      }
+      els.factText.style.transition = 'opacity 0.4s ease';
+      show();
+      setInterval(show, 6000);
+    }
+
+    // ===== FISHER IDLE =====
+    function setupFisherIdle() {
+      var body = els.fisher.querySelector('#fisher-body');
+      if (body) body.style.animation = 'fisherIdle 4s ease-in-out infinite';
+
+      var rod = els.fisher.querySelector('.rod');
+      if (rod) {
+        rod.style.transformOrigin = '165px 115px';
+        rod.style.animation = 'rodSway 3.5s ease-in-out infinite';
+      }
+    }
+
+    // ===== BANK IDLE =====
+    function setupBankIdle() {
+      var flag = els.bank.querySelector('.flag-cloth');
+      if (flag) flag.style.animation = 'flagWave 3s ease-in-out infinite';
+
+      var windows = els.bank.querySelectorAll('.window');
+      windows.forEach(function(w, i) {
+        w.style.animation = 'windowBlink 6s ease-in-out infinite';
+        w.style.animationDelay = (i * 0.8) + 's';
+      });
+
+      var lamps = els.bank.querySelectorAll('.entrance-lamp');
+      lamps.forEach(function(l) {
+        l.style.animation = 'windowBlink 4s ease-in-out infinite';
+      });
+    }
+
+    // ===== SPEECH BUBBLE =====
+    function showSpeech(el, text, duration) {
+      el.textContent = text;
+      el.classList.add('active');
+      setTimeout(function() { el.classList.remove('active'); }, duration || 3500);
+    }
+
+    // ===== WATER RIPPLE =====
+    function waterRipple(x, y) {
+      var container = els.waterRipples;
+      var rect = container.getBoundingClientRect();
+      var r = document.createElement('div');
+      r.className = 'ripple';
+      r.style.left = (x - rect.left) + 'px';
+      r.style.top  = (y - rect.top) + 'px';
+      r.style.width = randInt(40, 90) + 'px';
+      r.style.height = r.style.width;
+      container.appendChild(r);
+      setTimeout(function() { if (r.parentNode) r.remove(); }, 2500);
+    }
+
+    // ===== FISHER CLICK =====
+    function onFisherClick(e) {
+      e.stopPropagation();
+      if (fisherBusy) return;
+      fisherBusy = true;
+
+      showSpeech(els.fisherSpeech, pick(FISHER_SPEECHES));
+
+      // Animate wave
+      els.fisher.style.animation = 'fisherWave 0.8s ease-in-out';
+      setTimeout(function() {
+        els.fisher.style.animation = '';
+        fisherBusy = false;
+      }, 1200);
+    }
+
+    // ===== BANK CLICK =====
+    function onBankClick(e) {
+      e.stopPropagation();
+      if (bankBusy) return;
+      bankBusy = true;
+
+      showSpeech(els.bankSpeech, pick(BANK_SPEECHES));
+
+      // Animate door open
+      var door = els.bank.querySelector('.bank-door-rect');
+      if (door) {
+        door.style.transition = 'transform 0.4s ease';
+        door.style.transformOrigin = 'right center';
+        door.style.transform = 'scaleX(0.3)';
+      }
+
+      // Lamps glow
+      var lamps = els.bank.querySelectorAll('.entrance-lamp');
+      lamps.forEach(function(l) { l.style.fill = '#2dbf6f'; });
+
+      setTimeout(function() {
+        if (door) {
+          door.style.transform = 'scaleX(1)';
+          setTimeout(function() { door.style.transition = ''; }, 500);
+        }
+        lamps.forEach(function(l) { l.style.fill = ''; });
+        bankBusy = false;
+      }, 3000);
+    }
+
+    // ===== SOUND TOGGLE =====
+    function toggleSound() {
+      muted = !muted;
+      els.soundIcon.textContent = muted ? '🔇' : '🔊';
+      els.soundBtn.setAttribute('aria-pressed', String(muted));
+      try { localStorage.setItem('pancing_muted', String(muted)); } catch(e) {}
+    }
+
+    function loadSoundPref() {
+      try {
+        var v = localStorage.getItem('pancing_muted');
+        if (v === 'true') { muted = true; els.soundIcon.textContent = '🔇'; }
+      } catch(e) {}
+    }
+
+    // ===== PLAYER NAME =====
+    function loadPlayerName() {
+      try {
+        var n = localStorage.getItem('pancing_player_name');
+        if (n) els.nameInput.value = n;
+      } catch(e) {}
+    }
+
+    function savePlayerName() {
+      try { localStorage.setItem('pancing_player_name', els.nameInput.value.trim()); } catch(e) {}
+    }
+
+    // ===== HIGH SCORES =====
+    function getHighScores() {
+      try {
+        var s = localStorage.getItem('pancing_highscores');
+        return s ? JSON.parse(s) : [];
+      } catch(e) { return []; }
+    }
+
+    function showHighScores() {
+      var scores = getHighScores();
+      var list = els.highscoreList;
+      if (scores.length === 0) {
+        list.innerHTML = '<p class="no-score">Belum ada skor. Jadilah yang pertama!</p>';
+      } else {
+        var medals = ['🥇', '🥈', '🥉', '', ''];
+        var html = '';
+        scores.slice(0, 5).forEach(function(e, i) {
+          html += '<div class="hs-entry"><span class="hs-rank">' + (medals[i] || '') + ' ' + (i+1) + '.</span> <span class="hs-name">' + (e.name || 'Anon') + '</span> <span class="hs-score">Rp ' + e.score.toLocaleString('id-ID') + '</span></div>';
+        });
+        list.innerHTML = html;
+      }
+      els.highscoreModal.hidden = false;
+    }
+
+    // ===== MODAL CLOSE =====
+    function closeAllModals() {
+      $$('.modal-overlay').forEach(function(m) { m.hidden = true; });
+    }
+
+    // ===== LANDING ↔ GAME TRANSITIONS =====
+    function hideLanding() {
+      // Sembunyikan semua elemen landing
+      var landingEls = ['.sky','.clouds','.water-container','.trees',
+        '.fisher-container','.bank-container','.floating-coins',
+        '.landing-main','.landing-footer'];
+      landingEls.forEach(function(sel) {
+        var el = $(sel);
+        if (el) el.style.display = 'none';
+      });
+      // Tampilkan game container
+      var gc = $('#game-container');
+      if (gc) gc.style.display = 'block';
+    }
+
+    function showLanding() {
+      var landingEls = ['.sky','.clouds','.water-container','.trees',
+        '.fisher-container','.bank-container','.floating-coins',
+        '.landing-main','.landing-footer'];
+      landingEls.forEach(function(sel) {
+        var el = $(sel);
+        if (el) el.style.display = '';
+      });
+      var gc = $('#game-container');
+      if (gc) gc.style.display = 'none';
+      closeAllModals();
+    }
+
+    function startCountdown(callback) {
+      var overlay = document.createElement('div');
+      overlay.className = 'countdown-overlay';
+      overlay.id = 'countdown-overlay';
+      var num = document.createElement('div');
+      num.className = 'countdown-number';
+      num.textContent = '3';
+      overlay.appendChild(num);
+      document.body.appendChild(overlay);
+
+      var count = 3;
+      var interval = setInterval(function() {
+        count--;
+        if (count > 0) {
+          num.textContent = String(count);
+        } else {
+          num.textContent = 'MANCING!';
+          num.style.fontSize = '4rem';
+          clearInterval(interval);
+          setTimeout(function() {
+            if (overlay.parentNode) overlay.remove();
+            if (callback) callback();
+          }, 600);
+        }
+      }, 800);
+    }
+
+    // ===== EVENT LISTENERS =====
+    function addEvents() {
+      // Start
+      els.startBtn.addEventListener('click', function() {
+        savePlayerName();
+        // Sembunyikan landing, tampilkan game
+        hideLanding();
+        // Countdown 3-2-1, lalu mulai game
+        startCountdown(function() {
+          if (window.GameEngine) {
+            window.GameEngine.start();
+          }
+        });
+      });
+
+      // How to play
+      els.howtoBtn.addEventListener('click', function() {
+        els.howtoModal.hidden = false;
+      });
+
+      // High scores
+      els.highscoreBtn.addEventListener('click', showHighScores);
+
+      // Sound
+      els.soundBtn.addEventListener('click', toggleSound);
+
+      // Player name save on change
+      els.nameInput.addEventListener('change', savePlayerName);
+
+      // Fisher click
+      els.fisher.addEventListener('click', onFisherClick);
+
+      // Bank click
+      els.bank.addEventListener('click', onBankClick);
+
+      // Water click → ripple
+      document.addEventListener('click', function(e) {
+        if (e.clientY > window.innerHeight * 0.68) {
+          waterRipple(e.clientX, e.clientY);
+        }
+      });
+
+      // Modal close buttons
+      $$('.modal-close').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var overlay = btn.closest('.modal-overlay');
+          if (overlay) overlay.hidden = true;
+        });
+      });
+
+      // Close modal on overlay click
+      $$('.modal-overlay').forEach(function(overlay) {
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) overlay.hidden = true;
+        });
+      });
+
+      // Game navigation buttons
+      var quitBtn = $('#quit-btn');
+      if (quitBtn) {
+        quitBtn.addEventListener('click', function() {
+          showLanding();
+        });
+      }
+
+      var menuBtn = $('#menu-btn');
+      if (menuBtn) {
+        menuBtn.addEventListener('click', function() {
+          showLanding();
+        });
+      }
+
+      var restartBtn = $('#restart-btn');
+      if (restartBtn) {
+        restartBtn.addEventListener('click', function() {
+          closeAllModals();
+          if (window.GameEngine) {
+            window.GameEngine.start();
+          }
+        });
+      }
+
+      // Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAllModals();
+        if (e.key.toLowerCase() === 'm') toggleSound();
+      });
+    }
+
+    // ===== RUN =====
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+</body>
+</html>

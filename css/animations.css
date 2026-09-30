@@ -1,0 +1,193 @@
+/* ===== ANIMATIONS.CSS — Keyframes & efek animasi ===== */
+
+/* ===== Gelombang air ===== */
+@keyframes wave {
+  0% { transform: translateX(0) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(0deg); }
+}
+
+@keyframes waveDrift {
+  0% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-8px) scaleY(1.04); }
+  100% { transform: translateY(4px) scaleY(0.96); }
+}
+
+/* ===== Ripple air ===== */
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* ===== Awan mengelus ===== */
+@keyframes drift {
+  0% { transform: translateX(-150px) rotate(0deg); opacity: 0.7; }
+  10% { opacity: 0.9; }
+  50% { opacity: 1; transform: translateX(calc(100vw + 150px)) rotate(3deg); }
+  90% { opacity: 0.9; }
+  100% { transform: translateX(calc(100vw + 150px)) rotate(3deg); }
+}
+
+/* ===== Joran bergoyang (idle) ===== */
+@keyframes rodSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes lineSway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+/* ===== Fisher idle / breath ===== */
+@keyframes fisherIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes fisherBlink {
+  0%, 90%, 100% { height: 6px; }
+  95% { height: 1px; }
+}
+
+/* ===== Fisher wave ===== */
+@keyframes fisherWave {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px) rotate(-3deg); }
+  50% { transform: translateX(4px) rotate(2deg); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+/* ===== Fisher happy ===== */
+@keyframes fisherHappy {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-10px) rotate(2deg); }
+  60% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+/* ===== Fisher reel ===== */
+@keyframes fisherReel {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px) rotate(-2deg); }
+  75% { transform: translateX(4px) rotate(2deg); }
+}
+
+/* ===== Fisher cast ===== */
+@keyframes fisherCast {
+  0% { transform: rotate(0deg); }
+  30% { transform: rotate(-25deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ===== Pohon (palm) goyang ===== */
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-3deg); }
+}
+
+@keyframes sway2 {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(4deg); }
+}
+
+/* ===== Bendera mengibar ===== */
+@keyframes flagWave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg) scaleX(1.03); }
+  50% { transform: rotate(0deg) scaleX(0.97); }
+  75% { transform: rotate(-2deg) scaleX(1.02); }
+}
+
+/* ===== Sparkle judul ===== */
+@keyframes sparkle {
+  0%, 100% { text-shadow: 0 0 8px rgba(246, 194, 33, 0.6); }
+  50% { text-shadow: 0 0 14px rgba(246, 194, 33, 0.9), 0 0 22px rgba(246, 194, 33, 0.5); }
+}
+
+/* ===== Coin spin (judul) ===== */
+@keyframes coinSpin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+@keyframes coinSpin2 {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(-360deg); }
+}
+
+/* ===== Coin kilau ===== */
+@keyframes coinGlow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(246, 194, 33, 0.7)); }
+  50% { filter: drop-shadow(0 0 12px rgba(246, 194, 33, 1)); }
+}
+
+/* ===== Tombol pulse ===== */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+}
+
+/* ===== Float up (floating coins) ===== */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ===== Bank door open ===== */
+@keyframes doorOpen {
+  0% { transform: scaleY(1) scaleX(1); transform-origin: right center; }
+  50% { transform: scaleY(1.05) scaleX(0.96) translateX(2px); transform-origin: right center; }
+  100% { transform: scaleY(1) scaleX(1); transform-origin: right center; }
+}
+
+/* ===== Bank window blink ===== */
+@keyframes windowBlink {
+  0%, 45%, 55%, 100% { fill: #fffbe6; }
+  50% { fill: #ffdd44; }
+}
+
+/* ===== Bank flag wave (separate) ===== */
+@keyframes flagWaveSlow {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(4deg); }
+  70% { transform: rotate(-3deg); }
+}
+
+/* ===== Uang mini di permukaan air (landing) ===== */
+@keyframes surfaceBob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(3deg); }
+}
+
+/* ===== Toast (nanti untuk game) ===== */
+@keyframes toastIn {
+  0% { opacity: 0; transform: translateY(20px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes toastOut {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-20px) scale(0.9); }
+}
+
+@keyframes fadeSlide {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

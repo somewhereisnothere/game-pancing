@@ -1,0 +1,292 @@
+/* ===== GAME.CSS — Layout Canvas, HUD, Toast, dan Modal Game Over ===== */
+/* Proyek: Pancing Rupiah */
+
+/* Game canvas container */
+.game-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: none;
+}
+
+body.screen-game .game-container,
+body.screen-countdown .game-container {
+  display: block;
+}
+
+#game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* HUD Header (atas) */
+.hud {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(28, 42, 57, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: 2px solid rgba(246, 194, 33, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  color: var(--white);
+  pointer-events: auto;
+  user-select: none;
+  max-width: 95vw;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hud-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1rem;
+}
+
+.hud-label {
+  font-size: 1.1rem;
+}
+
+.hud-value {
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* Special HUD elements */
+.timer-value {
+  color: var(--white);
+  min-width: 42px;
+}
+
+.timer-low {
+  color: var(--red);
+  animation: pulse 0.8s infinite;
+}
+
+.combo-badge {
+  background: linear-gradient(135deg, var(--red), var(--gold-deep));
+  color: var(--white);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: none;
+}
+
+.combo-badge.active {
+  display: inline-block;
+  animation: pulse 0.5s infinite;
+}
+
+/* Peduli Rupiah Meter bar */
+.peduli-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.peduli-bar {
+  width: 70px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.peduli-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--good), var(--gold));
+  transition: width 0.3s ease;
+  border-radius: 6px;
+}
+
+.peduli-fill.full {
+  background: linear-gradient(90deg, var(--gold), var(--red));
+  animation: pulseSubtle 0.6s infinite;
+}
+
+/* HUD buttons */
+.hud-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  color: var(--white);
+}
+
+.hud-btn:hover {
+  transform: scale(1.15);
+}
+
+/* Wallet widget */
+.wallet-widget {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 20;
+  background: linear-gradient(135deg, var(--wood), #7b4b2a);
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  color: var(--white);
+  cursor: pointer;
+  transition: transform 0.2s;
+  pointer-events: auto;
+}
+
+.wallet-widget:hover {
+  transform: scale(1.05);
+}
+
+.wallet-icon {
+  font-size: 1.5rem;
+}
+
+.wallet-score {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+
+/* Countdown overlay */
+.countdown-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+.countdown-number {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 7rem;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(246, 194, 33, 0.8), 0 4px 10px rgba(0, 0, 0, 0.5);
+  animation: pulse 0.9s ease-out infinite;
+}
+
+/* Toast container */
+.toast-container {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  background: rgba(28, 42, 57, 0.92);
+  color: var(--white);
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  animation: toastIn 0.3s ease-out forwards;
+}
+
+.toast.toast-good {
+  border-color: var(--good);
+  color: var(--good);
+}
+
+.toast.toast-bad {
+  border-color: var(--bad);
+  color: var(--bad);
+}
+
+.toast.toast-bonus {
+  background: linear-gradient(135deg, var(--gold-deep), var(--red));
+  border-color: var(--gold);
+  color: var(--white);
+}
+
+.toast.toast-out {
+  animation: toastOut 0.3s ease-in forwards;
+}
+
+/* Game Over Modal additions */
+.gameover-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.summary-card {
+  text-align: center;
+}
+
+.summary-value {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.fact-box-gameover {
+  background: rgba(246, 194, 33, 0.15);
+  border: 1px dashed var(--gold);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.85rem;
+  margin-top: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Responsive HUD */
+@media (max-width: 480px) {
+  .hud {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    gap: 8px;
+  }
+  .peduli-bar { width: 45px; }
+  .wallet-widget {
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 10px;
+  }
+}
